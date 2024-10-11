@@ -3,11 +3,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-import praktikum.Bun;
-import praktikum.Burger;
-import praktikum.Ingredient;
-import praktikum.IngredientType;
+import praktikum.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerMockTest {
@@ -16,6 +14,9 @@ public class BurgerMockTest {
 
     @Mock
     private Ingredient ingredientMock;
+
+    @Spy
+    Ingredient ingredient = new Ingredient(IngredientType.FILLING, "Сыр с астероидной плесенью", 4142);
 
     @Test
     public void setBunsTest() {
@@ -60,8 +61,7 @@ public class BurgerMockTest {
     public void getReceiptBurgerTest() {
         Burger burger = new Burger();
         burger.setBuns(bunMock);
-        burger.addIngredient(new Ingredient(IngredientType.FILLING, "Сыр с астероидной плесенью", 4142));
-        burger.addIngredient(new Ingredient(IngredientType.SAUCE, "Соус Spicy-X", 90));
+        burger.addIngredient(ingredient);
         String expectedReceipt = burger.getReceipt();
         Assert.assertEquals(expectedReceipt, burger.getReceipt());
     }
